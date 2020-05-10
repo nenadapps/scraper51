@@ -32,6 +32,12 @@ def get_details(html, subcategory, stamp_url):
     try:
         price = html.select('.price')[0].get_text().strip()
         price = price.replace('Price: $', '').strip()
+        
+        if 'Price' in price:
+            price_parts1 = price.split('$')
+            price_parts2 = price_parts1[1].split('Price')
+            price = price_parts2[0]
+        
         stamp['price'] = price
     except:
         stamp['price'] = None  
